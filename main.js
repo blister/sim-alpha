@@ -18,6 +18,7 @@ function simulate() {
 			actors.splice(i, 1);
 		}
 		console.log('[' + tick + '] Actor ' + i + ': ' + actor.name);
+		actor.act();
 	}
 }
 
@@ -29,21 +30,23 @@ function Alpha(name) {
 
 	this.jobInterval = this.initRandom(10,20);
 
-	this.lifeSpan = this.initRandom(1,1000);
-	this.duplicationInterval = this.initRandom(200, 600);
+	this.lifeSpan = this.initRandom(1,10);
+	this.duplicationInterval = this.initRandom(10, 50);
+
+	console.log(this);
 }
 
 Alpha.prototype.act = function() {
-	if ( tick % this.jobInterval ) {
+	if ( tick % this.jobInterval == 0 ) {
 		console.log(this.name + ' is performing ' + this.job + ' at ' + tick);
 	}
 
-	if ( tick % this.duplicationInterval ) {
+	if ( tick % this.duplicationInterval == 0 ) {
 		console.log('Life finds a way...');
 		this.procreate();
 	}
 
-	if ( tick % this.lifeSpan ) {
+	if ( tick % this.lifeSpan == 0  ) {
 		console.log('Oh no...');
 		this.die();
 	}
@@ -65,8 +68,7 @@ Alpha.prototype.initRandom = function(min,max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 };
 
-
 // RUN THE SIMULATION
-actors.push(new Alpha('Biogenesis'));
+actors.push(new Alpha('A0'));
 
 setInterval(simulate, 1000);
