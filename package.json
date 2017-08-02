@@ -1,0 +1,19 @@
+{
+  "name": "alpha",
+  "version": "1.0.0",
+  "description": "Alpha Life!",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/blister/sim-alpha.git"
+  },
+  "author": "Eric Ryan Harrison <me@ericharrison.info>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blister/sim-alpha/issues"
+  },
+  "homepage": "https://github.com/blister/sim-alpha#readme"
+}
