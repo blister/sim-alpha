@@ -69,4 +69,4 @@ Alpha.prototype.initRandom = function(min,max) {
 // RUN THE SIMULATION
 actors.push(new Alpha('Biogenesis'));
 
-setTimeout(simulate, 1000);
+setInterval(simulate, 1000);
