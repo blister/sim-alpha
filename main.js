@@ -17,6 +17,7 @@ function simulate() {
 
 		if ( actor.status == 'dead' ) {
 			actors.splice(i, 1);
+			l = l - 1;
 		}
 		console.log('[' + tick + '] Actor ' + i + ': ' + actor.name);
 		actor.act();
@@ -33,11 +34,12 @@ function Alpha(name) {
 	this.name = name;
 	this.status = 'alive';
 	this.job = 'living';
+	this.age = 0;
 
 	this.jobInterval = this.initRandom(10,20);
 
 	this.lifeSpan = this.initRandom(1,100);
-	this.duplicationInterval = this.initRandom(10, 50);
+	this.duplicationInterval = this.initRandom(10, 20);
 
 	console.log(this);
 }
@@ -47,15 +49,17 @@ Alpha.prototype.act = function() {
 		console.log(this.name + ' is performing ' + this.job + ' at ' + tick);
 	}
 
-	if ( tick % this.duplicationInterval == 0 ) {
+	if ( this.age > this.duplicationInterval && this.initRandom(1,5) == 5 ) {
 		console.log('Life finds a way...');
 		this.procreate();
 	}
 
-	if ( tick % this.lifeSpan == 0  ) {
+	if ( this.age > this.lifeSpan && this.initRandom(1,5) == 5 ) {
 		console.log('Oh no...');
 		this.die();
 	}
+
+	this.age = this.age + 1;
 };
 
 
