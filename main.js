@@ -2,6 +2,7 @@
 
 var actors = [];
 
+var worldId;
 var worldSpeed = 1000;
 var tick = 0;
 
@@ -20,6 +21,11 @@ function simulate() {
 		console.log('[' + tick + '] Actor ' + i + ': ' + actor.name);
 		actor.act();
 	}
+
+	if ( actors.length == 0 ) {
+		console.log('The colony has died. It lasted ' + tick + ' cycles');
+		clearInterval(worldId);
+	}
 }
 
 // The first crude life-form emerges.
@@ -30,7 +36,7 @@ function Alpha(name) {
 
 	this.jobInterval = this.initRandom(10,20);
 
-	this.lifeSpan = this.initRandom(1,10);
+	this.lifeSpan = this.initRandom(1,100);
 	this.duplicationInterval = this.initRandom(10, 50);
 
 	console.log(this);
@@ -55,7 +61,7 @@ Alpha.prototype.act = function() {
 
 Alpha.prototype.procreate = function() {
 	console.log(this.name + ' has procreated at ' + tick + '!');
-	actors.push(new Alpha(tick + '-' + this.name));
+	actors.push(new Alpha(tick + ':' + this.name));
 };
 Alpha.prototype.die = function() {
 	console.log(this.name + ' has died at ' + tick + '. RIP. :(');
@@ -71,4 +77,4 @@ Alpha.prototype.initRandom = function(min,max) {
 // RUN THE SIMULATION
 actors.push(new Alpha('A0'));
 
-setInterval(simulate, 1000);
+worldId = setInterval(simulate, 1000);
